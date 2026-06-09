@@ -12,7 +12,7 @@
   const firebaseConfig = {
     apiKey: 'AIzaSyDloOpiwDq7PzwkhBiOap8SCncXn226UNo',
     authDomain: 'digital-euro-quiz-ahm-2026.firebaseapp.com',
-    databaseURL: 'REPLACE_WITH_DATABASE_URL',
+    databaseURL: 'https://digital-euro-quiz-ahm-2026-default-rtdb.europe-west1.firebasedatabase.app',
     projectId: 'digital-euro-quiz-ahm-2026',
     storageBucket: 'digital-euro-quiz-ahm-2026.firebasestorage.app',
     messagingSenderId: '667467540583',
