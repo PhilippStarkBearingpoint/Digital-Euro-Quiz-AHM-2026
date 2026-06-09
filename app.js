@@ -123,6 +123,18 @@
   const leaderboardBox = document.getElementById('leaderboard');
   const leaderboardList = document.getElementById('leaderboardList');
 
+
+let playerRankEl = document.getElementById('playerRank');
+const leaderboardHeading = leaderboardBox ? leaderboardBox.querySelector('h3') : null;
+
+if (!playerRankEl && leaderboardHeading) {
+  playerRankEl = document.createElement('p');
+  playerRankEl.id = 'playerRank';
+  playerRankEl.className = 'rank-summary hidden';
+  leaderboardHeading.parentNode.insertBefore(playerRankEl, leaderboardHeading);
+}
+``
+  
   if (!startView || !quizView || !resultView || !startBtn || !playerNameInput || !qIndexEl || !qTotalEl || !scoreValEl || !timerFill || !timerText || !questionText || !choicesEl || !explanationEl || !nextBtn || !finalScoreEl || !finalTimeEl || !submitBtn || !restartBtn || !submitMsg || !leaderboardBox || !leaderboardList) {
     console.error('Critical DOM elements are missing. Please check index.html IDs.');
     return;
@@ -277,6 +289,14 @@ const state = {
 
     leaderboardBox.classList.add('hidden');
     submitMsg.textContent = '';
+
+    
+state.submittedEntryMeta = null;
+if (playerRankEl) {
+  playerRankEl.textContent = '';
+  playerRankEl.classList.add('hidden');
+}
+``
 
     startView.classList.remove('visible');
     startView.style.display = 'none';
