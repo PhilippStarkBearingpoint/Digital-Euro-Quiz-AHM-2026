@@ -1,14 +1,6 @@
 (function () {
   'use strict';
 
-  /*
-    FINAL ROBUST VERSION
-    - Quiz start works independently of Firebase
-    - Firebase loads lazily in background
-    - Leaderboard works once the single missing value below is filled in:
-      databaseURL
-  */
-
   const firebaseConfig = {
     apiKey: 'AIzaSyDloOpiwDq7PzwkhBiOap8SCncXn226UNo',
     authDomain: 'digital-euro-quiz-ahm-2026.firebaseapp.com',
@@ -51,39 +43,39 @@
     },
     {
       id: 'q4',
-      text: 'Which statement is most accurate?',
-      choices: ['Completely anonymous', 'High privacy standards', 'Everything is transparent'],
+      text: 'How is privacy designed in the digital euro?',
+      choices: ['My personal bank can see transactions', 'Cashlike high privacy standards', 'Payments will be transparent to all users like in Blockchain'],
       correctIndex: 1,
-      explanation: 'The ECB emphasises privacy as a core principle. However, full anonymity like cash works differently from a technical and regulatory perspective.'
+      explanation: 'The ECB emphasises privacy as a core principle. Data will thus be processed and handled securely through encryption and pseudonymisation. For offline payments only the involved two parties would know the transaction details.'
     },
     {
       id: 'q5',
       text: 'Which benefit is typical for citizens?',
-      choices: ['Fees for every payment', 'Safe and easy payments across Europe', 'Can only be used with constant internet access'],
+      choices: ['End User-Fees for every payment', 'Safe and easy payments across Europe', 'Can only be used with constant internet access'],
       correctIndex: 1,
       explanation: 'The goal is convenient, secure and Europe-wide usability – without additional fees for end users.'
     },
     {
       id: 'q6',
       text: 'Which technology could be used?',
-      choices: ['Only blockchain', 'DLT or traditional systems', 'Only traditional databases'],
+      choices: ['Blockchain', 'A centralized settlement platform', 'DLT'],
       correctIndex: 1,
-      explanation: 'The approach is technology-neutral: DLT-based or traditional architectures are both possible – no final decision has been made yet.'
+      explanation: 'The digital euro would operate on a central settlement platform, and the Eurosystem will record and verify all settlements and holdings.'
     },
     {
       id: 'q7',
       text: 'When could an introduction realistically be made at the earliest?',
       choices: ['it is live already', '2029', '2035'],
       correctIndex: 1,
-      explanation: 'According to the current roadmap, from 2029 onwards is realistic, depending on the EU process and the ECB project phases.'
+      explanation: 'According to the current roadmap, from 2029 onwards is realistic, depending on the EU process and the ECB project phases. The pilot with limited use-case is expeted to go-live in mid 2027.'
     },
     {
       id: 'q8',
       text: 'Which of the following is a key strategic motive for the ECB to introduce the digital euro?',
       choices: [
-        'To replace fintechs for payments',
-        'To strengthen EU autonomy by reducing dependence on non-EU payment providers',
-        'To launch a state-run cryptocurrency to compete with Bitcoin'
+        'Replace fintechs for payments',
+        'Strengthen EU autonomy by reducing dependence on non-EU payment providers',
+        'Launching a cryptocurrency to compete with Bitcoin'
       ],
       correctIndex: 1,
       explanation: 'The digital euro aims to strengthen Europe\'s strategic autonomy and reduce dependency on non-EU payment providers. It is not intended to replace fintechs and it is not a cryptocurrency.'
@@ -92,9 +84,9 @@
       id: 'q9',
       text: 'How does the digital euro promote financial inclusion?',
       choices: [
-        'Easy connection with credit card apps',
+        'Helps improving personal credit score',
         'Access to payments via digital wallet without a traditional bank account',
-        'Automatically opening a private bank account for every citizen'
+        'Only available to people with an existing bank account'
       ],
       correctIndex: 1,
       explanation: 'The digital euro could support financial inclusion by enabling access to digital payments through a digital wallet even without a traditional bank account.'
