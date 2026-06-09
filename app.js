@@ -325,16 +325,36 @@ if (playerRankEl) {
     finalScoreEl.textContent = String(state.score);
     finalTimeEl.textContent = (state.totalTimeMs / 1000).toFixed(1);
   }
+  
+function renderLeaderboardRows(rows) {
+  leaderboardList.innerHTML = '';
 
-  function renderLeaderboardRows(rows) {
-    leaderboardList.innerHTML = '';
-    rows.slice(0, CONFIG.SHOW_TOP_N).forEach(function (row, i) {
-      const li = document.createElement('li');
-      const secs = (Number(row.totalTimeMs || 0) / 1000).toFixed(1);
-      li.textContent = '#' + (i + 1) + ' ' + row.name + ' — ' + row.score + ' points · ' + secs + 's';
-      leaderboardList.appendChild(li);
+  rows.slice(0, CONFIG.SHOW_TOP_N).forEach(function (row, i) {
+    const li = document.createElement('li');
+    const secs = (Number(row.totalTimeMs || 0) / 1000).toFixed(1);
+    li.textContent = '#' + (i + 1) + ' ' + row.name + ' — ' + row.score + ' points · ' + secs + 's';
+    leaderboardList.appendChild(li);
+  });
+
+  if (playerRankEl && state.submittedEntryMeta) {
+    const rankIndex = rows.findIndex(function (row) {
+      return (
+        row.name === state.submittedEntryMeta.name &&
+        Number(row.score || 0) === Number(state.submittedEntryMeta.score) &&
+        Number(row.totalTimeMs || 0) === Number(state.submittedEntryMeta.totalTimeMs) &&
+        Number(row.createdAt || 0) === Number(state.submittedEntryMeta.createdAt)
+      );
     });
+
+    if (rankIndex >= 0) {
+      playerRankEl.textContent = 'Your current rank: #' + (rankIndex + 1) + ' of ' + rows.length;
+      playerRankEl.classList.remove('hidden');
+    } else {
+      playerRankEl.textContent = '';
+      playerRankEl.classList.add('hidden');
+    }
   }
+}
 
   function startLeaderboardListener() {
     if (!firebaseReady || leaderboardStarted) return;
