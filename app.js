@@ -67,7 +67,7 @@
       text: 'When could an introduction realistically be made at the earliest?',
       choices: ['It is already live', '2029', '2034'],
       correctIndex: 1,
-      explanation: 'According to the current roadmap, from 2029 onwards is realistic, depending on the EU process and the ECB project phases. The pilot with limited scope is expeted to go-live in mid 2027.'
+      explanation: 'According to the current roadmap, from 2029 onwards is realistic, depending on the EU process and the ECB project phases. The pilot with limited scope is expected to go live in mid-2027.'
     },
     {
       id: 'q8',
@@ -115,37 +115,36 @@
   const leaderboardBox = document.getElementById('leaderboard');
   const leaderboardList = document.getElementById('leaderboardList');
 
-
-let playerRankEl = document.getElementById('playerRank');
-const leaderboardHeading = leaderboardBox ? leaderboardBox.querySelector('h3') : null;
-
-if (!playerRankEl && leaderboardHeading) {
-  playerRankEl = document.createElement('p');
-  playerRankEl.id = 'playerRank';
-  playerRankEl.className = 'rank-summary hidden';
-  leaderboardHeading.parentNode.insertBefore(playerRankEl, leaderboardHeading);
-}
-``
-  
   if (!startView || !quizView || !resultView || !startBtn || !playerNameInput || !qIndexEl || !qTotalEl || !scoreValEl || !timerFill || !timerText || !questionText || !choicesEl || !explanationEl || !nextBtn || !finalScoreEl || !finalTimeEl || !submitBtn || !restartBtn || !submitMsg || !leaderboardBox || !leaderboardList) {
     console.error('Critical DOM elements are missing. Please check index.html IDs.');
     return;
   }
 
+  let playerRankEl = document.getElementById('playerRank');
+  const leaderboardHeading = leaderboardBox.querySelector('h3');
+
+  if (!playerRankEl && leaderboardHeading) {
+    playerRankEl = document.createElement('p');
+    playerRankEl.id = 'playerRank';
+    playerRankEl.className = 'rank-summary hidden';
+    leaderboardHeading.parentNode.insertBefore(playerRankEl, leaderboardHeading);
+  }
+
   qTotalEl.textContent = String(QUESTIONS.length);
 
-const state = {
-  playerName: '',
-  current: 0,
-  score: 0,
-  totalTimeMs: 0,
-  answers: [],
-  timer: null,
-  timeLeftMs: CONFIG.QUESTION_TIME_SEC * 1000,
-  order: [],
-  correctIdx: -1,
-  submittedEntryMeta: null
-};
+  const state = {
+    playerName: '',
+    current: 0,
+    score: 0,
+    totalTimeMs: 0,
+    answers: [],
+    timer: null,
+    timeLeftMs: CONFIG.QUESTION_TIME_SEC * 1000,
+    order: [],
+    correctIdx: -1,
+    submittedEntryMeta: null,
+    hasSubmittedScore: false
+  };
 
   let firebaseReady = false;
   let leaderboardStarted = false;
@@ -247,9 +246,7 @@ const state = {
     });
 
     explanationEl.textContent =
-      (isCorrect ? 'Correct! ' : 'Incorrect. ') +
-      q.explanation +
-      (isCorrect ? ' (+' + add + ' points)' : '');
+      (isCorrect ? 'Correct! ' : 'Incorrect. ') + q.explanation + (isCorrect ? ' (+' + add + ' points)' : '');
 
     nextBtn.disabled = false;
     scoreValEl.textContent = String(state.score);
@@ -273,21 +270,29 @@ const state = {
       return;
     }
 
+    if (document.activeElement) {
+      document.activeElement.blur();
+    }
+    window.scrollTo(0, 0);
+
     state.playerName = name;
     state.current = 0;
     state.score = 0;
     state.totalTimeMs = 0;
     state.answers = [];
+    state.hasSubmittedScore = false;
+    state.submittedEntryMeta = null;
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Submit score & show leaderboard';
 
     leaderboardBox.classList.add('hidden');
     submitMsg.textContent = '';
 
-    
-state.submittedEntryMeta = null;
-if (playerRankEl) {
-  playerRankEl.textContent = '';
-  playerRankEl.classList.add('hidden');
-}
+    if (playerRankEl) {
+      playerRankEl.textContent = '';
+      playerRankEl.classList.add('hidden');
+    }
 
     startView.classList.remove('visible');
     startView.style.display = 'none';
@@ -316,36 +321,36 @@ if (playerRankEl) {
     finalScoreEl.textContent = String(state.score);
     finalTimeEl.textContent = (state.totalTimeMs / 1000).toFixed(1);
   }
-  
-function renderLeaderboardRows(rows) {
-  leaderboardList.innerHTML = '';
 
-  rows.slice(0, CONFIG.SHOW_TOP_N).forEach(function (row, i) {
-    const li = document.createElement('li');
-    const secs = (Number(row.totalTimeMs || 0) / 1000).toFixed(1);
-    li.textContent = '#' + (i + 1) + ' ' + row.name + ' — ' + row.score + ' points · ' + secs + 's';
-    leaderboardList.appendChild(li);
-  });
+  function renderLeaderboardRows(rows) {
+    leaderboardList.innerHTML = '';
 
-  if (playerRankEl && state.submittedEntryMeta) {
-    const rankIndex = rows.findIndex(function (row) {
-      return (
-        row.name === state.submittedEntryMeta.name &&
-        Number(row.score || 0) === Number(state.submittedEntryMeta.score) &&
-        Number(row.totalTimeMs || 0) === Number(state.submittedEntryMeta.totalTimeMs) &&
-        Number(row.createdAt || 0) === Number(state.submittedEntryMeta.createdAt)
-      );
+    rows.slice(0, CONFIG.SHOW_TOP_N).forEach(function (row, i) {
+      const li = document.createElement('li');
+      const secs = (Number(row.totalTimeMs || 0) / 1000).toFixed(1);
+      li.textContent = '#' + (i + 1) + ' ' + row.name + ' — ' + row.score + ' points · ' + secs + 's';
+      leaderboardList.appendChild(li);
     });
 
-    if (rankIndex >= 0) {
-      playerRankEl.textContent = 'Your current rank: #' + (rankIndex + 1) + ' of ' + rows.length;
-      playerRankEl.classList.remove('hidden');
-    } else {
-      playerRankEl.textContent = '';
-      playerRankEl.classList.add('hidden');
+    if (playerRankEl && state.submittedEntryMeta) {
+      const rankIndex = rows.findIndex(function (row) {
+        return (
+          row.name === state.submittedEntryMeta.name &&
+          Number(row.score || 0) === Number(state.submittedEntryMeta.score) &&
+          Number(row.totalTimeMs || 0) === Number(state.submittedEntryMeta.totalTimeMs) &&
+          Number(row.createdAt || 0) === Number(state.submittedEntryMeta.createdAt)
+        );
+      });
+
+      if (rankIndex >= 0) {
+        playerRankEl.textContent = 'Your current rank: #' + (rankIndex + 1) + ' of ' + rows.length;
+        playerRankEl.classList.remove('hidden');
+      } else {
+        playerRankEl.textContent = '';
+        playerRankEl.classList.add('hidden');
+      }
     }
   }
-}
 
   function startLeaderboardListener() {
     if (!firebaseReady || leaderboardStarted) return;
@@ -379,6 +384,10 @@ function renderLeaderboardRows(rows) {
   }
 
   async function submitScore() {
+    if (state.hasSubmittedScore) {
+      return;
+    }
+
     submitBtn.disabled = true;
     submitMsg.textContent = 'Submitting score …';
 
@@ -391,27 +400,30 @@ function renderLeaderboardRows(rows) {
     try {
       const createdAt = Date.now();
 
-state.submittedEntryMeta = {
-  name: state.playerName,
-  score: state.score,
-  totalTimeMs: state.totalTimeMs,
-  createdAt: createdAt
-};
+      state.submittedEntryMeta = {
+        name: state.playerName,
+        score: state.score,
+        totalTimeMs: state.totalTimeMs,
+        createdAt: createdAt
+      };
 
-const entryRef = firebasePush(firebaseRef(firebaseDb, 'leaderboard'));
-await firebaseSet(entryRef, {
-  name: state.playerName,
-  score: state.score,
-  totalTimeMs: state.totalTimeMs,
-  createdAt: createdAt
-});
+      const entryRef = firebasePush(firebaseRef(firebaseDb, 'leaderboard'));
+      await firebaseSet(entryRef, {
+        name: state.playerName,
+        score: state.score,
+        totalTimeMs: state.totalTimeMs,
+        createdAt: createdAt
+      });
+
+      state.hasSubmittedScore = true;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Score submitted';
 
       leaderboardBox.classList.remove('hidden');
       submitMsg.textContent = 'Score saved! The leaderboard is shown below. ✅';
     } catch (err) {
       console.error(err);
       submitMsg.textContent = 'Could not save the score. Please try again later or contact the booth team.';
-    } finally {
       submitBtn.disabled = false;
     }
   }
