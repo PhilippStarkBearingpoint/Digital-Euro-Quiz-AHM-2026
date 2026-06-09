@@ -378,14 +378,23 @@ if (playerRankEl) {
     }
 
     try {
-      const entryRef = firebasePush(firebaseRef(firebaseDb, 'leaderboard'));
-      await firebaseSet(entryRef, {
-        name: state.playerName,
-        score: state.score,
-        totalTimeMs: state.totalTimeMs,
-        createdAt: Date.now()
-      });
+      const createdAt = Date.now();
 
+state.submittedEntryMeta = {
+  name: state.playerName,
+  score: state.score,
+  totalTimeMs: state.totalTimeMs,
+  createdAt: createdAt
+};
+
+const entryRef = firebasePush(firebaseRef(firebaseDb, 'leaderboard'));
+await firebaseSet(entryRef, {
+  name: state.playerName,
+  score: state.score,
+  totalTimeMs: state.totalTimeMs,
+  createdAt: createdAt
+});
+``
       leaderboardBox.classList.remove('hidden');
       submitMsg.textContent = 'Score saved! The leaderboard is shown below. ✅';
     } catch (err) {
