@@ -130,17 +130,18 @@
 
   qTotalEl.textContent = String(QUESTIONS.length);
 
-  const state = {
-    playerName: '',
-    current: 0,
-    score: 0,
-    totalTimeMs: 0,
-    answers: [],
-    timer: null,
-    timeLeftMs: CONFIG.QUESTION_TIME_SEC * 1000,
-    order: [],
-    correctIdx: -1
-  };
+const state = {
+  playerName: '',
+  current: 0,
+  score: 0,
+  totalTimeMs: 0,
+  answers: [],
+  timer: null,
+  timeLeftMs: CONFIG.QUESTION_TIME_SEC * 1000,
+  order: [],
+  correctIdx: -1,
+  submittedEntryMeta: null
+};
 
   let firebaseReady = false;
   let leaderboardStarted = false;
