@@ -1,13 +1,6 @@
 (function () {
   'use strict';
 
-  // === Firebase placeholders ===
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDloOpiwDq7PzwkhBiOap8SCncXn226UNo",
   authDomain: "digital-euro-quiz-ahm-2026.firebaseapp.com",
@@ -16,8 +9,7 @@ const firebaseConfig = {
   messagingSenderId: "667467540583",
   appId: "1:667467540583:web:3f657b2dc6efedf43b8cc2"
 };
-
-// Initialize Firebase
+``
 const app = initializeApp(firebaseConfig);
 
   const firebaseAppCheckSiteKey = '';
