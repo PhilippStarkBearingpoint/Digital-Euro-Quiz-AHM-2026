@@ -322,14 +322,14 @@ button.secondary{
   }
 
   .header-inner{
-    padding:12px 14px 10px;
-    min-height:58px;
+    padding:14px 14px 12px;
+    min-height:72px;
   }
 
   .header-title{
-    padding-top:24px;
-    font-size:17px;
-    line-height:1.1;
+    padding-top:34px;
+    font-size:19px;
+    line-height:1.05;
     white-space:nowrap;
     letter-spacing:.1px;
   }
@@ -351,7 +351,6 @@ button.secondary{
     padding:16px;
   }
 
-  /* Start screen compact */
   #start.card{
     margin-top:8px;
   }
@@ -393,7 +392,6 @@ button.secondary{
     line-height:1.35;
   }
 
-  /* Quiz screen compact enough for iPhone */
   #quiz.card{
     min-height:unset;
     margin-top:8px;
