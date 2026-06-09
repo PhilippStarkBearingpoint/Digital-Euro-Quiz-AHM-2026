@@ -44,7 +44,7 @@
     },
     {
       id: 'q3',
-      text: 'Would cash be abolished by the digital euro?',
+      text: 'Would cash be replaced by the digital euro?',
       choices: ['Yes', 'No'],
       correctIndex: 1,
       explanation: 'Cash will remain. The digital euro is intended to complement cash, not replace it.'
@@ -72,32 +72,32 @@
     },
     {
       id: 'q7',
-      text: 'When could decisions on an introduction realistically be made at the earliest?',
-      choices: ['2024', '2026', 'Mid-2030s'],
+      text: 'When could an introduction realistically be made at the earliest?',
+      choices: ['it is live already', '2029', '2035'],
       correctIndex: 1,
-      explanation: 'According to the current roadmap, decisions from 2026 onwards are realistic, depending on the EU process and the ECB project phases.'
+      explanation: 'According to the current roadmap, from 2029 onwards is realistic, depending on the EU process and the ECB project phases.'
     },
     {
       id: 'q8',
       text: 'Which of the following is a key strategic motive for the ECB to introduce the digital euro?',
       choices: [
-        'To replace fintechs for payments.',
-        'To strengthen EU autonomy by reducing dependence on non-EU payment providers.',
-        'To launch a state-run cryptocurrency to compete with Bitcoin.'
+        'To replace fintechs for payments',
+        'To strengthen EU autonomy by reducing dependence on non-EU payment providers',
+        'To launch a state-run cryptocurrency to compete with Bitcoin'
       ],
       correctIndex: 1,
       explanation: 'The digital euro aims to strengthen Europe\'s strategic autonomy and reduce dependency on non-EU payment providers. It is not intended to replace fintechs and it is not a cryptocurrency.'
     },
     {
       id: 'q9',
-      text: 'How does the digital euro promote financial inclusion for people without a traditional bank account?',
+      text: 'How does the digital euro promote financial inclusion?',
       choices: [
-        'Need to hold a commercial credit card.',
-        'Access via a digital wallet without a traditional bank account.',
-        'Automatically opening a private bank account for every citizen.'
+        'Easy connection with credit card apps',
+        'Access to payments via digital wallet without a traditional bank account',
+        'Automatically opening a private bank account for every citizen'
       ],
       correctIndex: 1,
-      explanation: 'The digital euro could support financial inclusion by enabling access through a digital wallet even without a traditional bank account.'
+      explanation: 'The digital euro could support financial inclusion by enabling access to digital payments through a digital wallet even without a traditional bank account.'
     }
   ];
 
