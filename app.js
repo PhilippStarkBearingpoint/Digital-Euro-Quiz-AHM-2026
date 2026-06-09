@@ -51,7 +51,7 @@
     {
       id: 'q5',
       text: 'Which benefit is typical for citizens?',
-      choices: ['End User-Fees for every payment', 'Safe and easy payments across Europe', 'Can only be used with constant internet access'],
+      choices: ['End-User fees for every payment', 'Safe and easy payments across Europe', 'Can only be used with constant internet access'],
       correctIndex: 1,
       explanation: 'The goal is convenient, secure and Europe-wide usability – without additional fees for end users.'
     },
@@ -65,9 +65,9 @@
     {
       id: 'q7',
       text: 'When could an introduction realistically be made at the earliest?',
-      choices: ['it is live already', '2029', '2035'],
+      choices: ['It is already live', '2029', '2034'],
       correctIndex: 1,
-      explanation: 'According to the current roadmap, from 2029 onwards is realistic, depending on the EU process and the ECB project phases. The pilot with limited use-case is expeted to go-live in mid 2027.'
+      explanation: 'According to the current roadmap, from 2029 onwards is realistic, depending on the EU process and the ECB project phases. The pilot with limited scope is expeted to go-live in mid 2027.'
     },
     {
       id: 'q8',
