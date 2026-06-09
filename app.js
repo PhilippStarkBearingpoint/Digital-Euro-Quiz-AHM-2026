@@ -1,17 +1,16 @@
 (function () {
   'use strict';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDloOpiwDq7PzwkhBiOap8SCncXn226UNo",
-  authDomain: "digital-euro-quiz-ahm-2026.firebaseapp.com",
-  projectId: "digital-euro-quiz-ahm-2026",
-  storageBucket: "digital-euro-quiz-ahm-2026.firebasestorage.app",
-  messagingSenderId: "667467540583",
-  appId: "1:667467540583:web:3f657b2dc6efedf43b8cc2"
-};
-``
-const app = initializeApp(firebaseConfig);
-
+  // === Firebase placeholders ===
+  const firebaseConfig = {
+    apiKey: 'REPLACE_WITH_API_KEY',
+    authDomain: 'REPLACE_WITH_AUTH_DOMAIN',
+    databaseURL: 'REPLACE_WITH_DATABASE_URL',
+    projectId: 'REPLACE_WITH_PROJECT_ID',
+    storageBucket: 'REPLACE_WITH_STORAGE_BUCKET',
+    messagingSenderId: 'REPLACE_WITH_MESSAGING_SENDER_ID',
+    appId: 'REPLACE_WITH_APP_ID'
+  };
   const firebaseAppCheckSiteKey = '';
 
   const CONFIG = { QUESTION_TIME_SEC: 30, SHOW_TOP_N: 20 };
