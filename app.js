@@ -296,7 +296,6 @@ if (playerRankEl) {
   playerRankEl.textContent = '';
   playerRankEl.classList.add('hidden');
 }
-``
 
     startView.classList.remove('visible');
     startView.style.display = 'none';
@@ -414,7 +413,7 @@ await firebaseSet(entryRef, {
   totalTimeMs: state.totalTimeMs,
   createdAt: createdAt
 });
-``
+
       leaderboardBox.classList.remove('hidden');
       submitMsg.textContent = 'Score saved! The leaderboard is shown below. ✅';
     } catch (err) {
