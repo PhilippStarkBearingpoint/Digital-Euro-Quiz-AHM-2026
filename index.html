@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digital Euro Challenge – Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-title">All Hands Meeting 2026</div>
+      <div class="header-logo" aria-label="BearingPoint">BearingPoint</div>
+    </div>
+  </header>
+
+  <main id="app">
+    <section id="start" class="card visible">
+      <h1>Digital Euro Challenge</h1>
+      <p class="sub">Answer 9 questions in under 5 minutes. Points are awarded for correct answers and speed.</p>
+      <label for="playerName">Your name or nickname</label>
+      <input id="playerName" type="text" maxlength="40" placeholder="e.g. Philipp S." />
+      <button id="startBtn" class="primary" type="button">Start quiz</button>
+      <p class="legal">By starting, you agree that your name, score and game time may be stored for the event leaderboard.</p>
+    </section>
+
+    <section id="quiz" class="card">
+      <div class="quiz-header">
+        <div id="progress">Question <span id="qIndex">1</span>/<span id="qTotal">9</span></div>
+        <div id="score">Points: <span id="scoreVal">0</span></div>
+      </div>
+      <div id="timerBar"><span id="timerFill"></span><span id="timerText"></span></div>
+      <h2 id="questionText"></h2>
+      <div id="choices"></div>
+      <div id="explanation" class="explanation"></div>
+      <div class="actions">
+        <button id="nextBtn" class="primary" type="button" disabled>Next</button>
+      </div>
+    </section>
+
+    <section id="result" class="card">
+      <h2>Done! 🎉</h2>
+      <p>Your score: <strong><span id="finalScore">0</span></strong> points<br/>
+      Total time: <strong><span id="finalTime">0</span> s</strong></p>
+      <div class="actions result-actions">
+        <button id="submitBtn" class="primary" type="button">Submit score & show leaderboard</button>
+        <button id="restartBtn" class="secondary" type="button">Play again</button>
+      </div>
+      <p id="submitMsg" class="muted"></p>
+      <div id="leaderboard" class="leaderboard hidden">
+        <h3>Live leaderboard (Top 20)</h3>
+        <ol id="leaderboardList"></ol>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
