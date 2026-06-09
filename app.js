@@ -328,7 +328,7 @@
     rows.slice(0, CONFIG.SHOW_TOP_N).forEach(function (row, i) {
       const li = document.createElement('li');
       const secs = (Number(row.totalTimeMs || 0) / 1000).toFixed(1);
-      li.textContent = '#' + (i + 1) + ' ' + row.name + ' — ' + row.score + ' points · ' + secs + 's';
+      li.textContent = row.name + ' — ' + row.score + ' points · ' + secs + 's';
       leaderboardList.appendChild(li);
     });
 
