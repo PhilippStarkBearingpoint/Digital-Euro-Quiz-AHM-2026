@@ -145,7 +145,6 @@ const state = {
   order: [],
   correctIdx: -1,
   submittedEntryMeta: null
-  hasSubmittedScore: false
 };
 
   let firebaseReady = false;
@@ -279,11 +278,6 @@ const state = {
     state.score = 0;
     state.totalTimeMs = 0;
     state.answers = [];
-    state.hasSubmittedScore = false;
-    state.submittedEntryMeta = null;
-    
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Submit score & show leaderboard';
 
     leaderboardBox.classList.add('hidden');
     submitMsg.textContent = '';
@@ -384,11 +378,7 @@ function renderLeaderboardRows(rows) {
     );
   }
 
-  async function submitScore() {    
-    if (state.hasSubmittedScore) {
-      return;
-  }
-
+  async function submitScore() {
     submitBtn.disabled = true;
     submitMsg.textContent = 'Submitting score …';
 
@@ -409,15 +399,6 @@ state.submittedEntryMeta = {
 };
 
 const entryRef = firebasePush(firebaseRef(firebaseDb, 'leaderboard'));
-const createdAt = Date.now();
-
-state.submittedEntryMeta = {
-  name: state.playerName,
-  score: state.score,
-  totalTimeMs: state.totalTimeMs,
-  createdAt: createdAt
-};
-
 await firebaseSet(entryRef, {
   name: state.playerName,
   score: state.score,
@@ -425,12 +406,8 @@ await firebaseSet(entryRef, {
   createdAt: createdAt
 });
 
-state.hasSubmittedScore = true;
-submitBtn.disabled = true;
-submitBtn.textContent = 'Score submitted';
-
-leaderboardBox.classList.remove('hidden');
-submitMsg.textContent = 'Score saved! The leaderboard is shown below. ✅';
+      leaderboardBox.classList.remove('hidden');
+      submitMsg.textContent = 'Score saved! The leaderboard is shown below. ✅';
     } catch (err) {
       console.error(err);
       submitMsg.textContent = 'Could not save the score. Please try again later or contact the booth team.';
